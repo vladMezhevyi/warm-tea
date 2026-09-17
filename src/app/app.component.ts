@@ -1,12 +1,8 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'mv-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class App {
-  protected readonly title = signal('mv-news');
-}
+export class App {}
