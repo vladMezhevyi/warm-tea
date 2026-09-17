@@ -1,0 +1,9 @@
+@use './styles/normalize';
+@use './styles/variables';
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
