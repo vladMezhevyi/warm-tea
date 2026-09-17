@@ -5,7 +5,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'mv-root',
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class App {
   protected readonly title = signal('mv-news');
