@@ -5,11 +5,6 @@ import { FullScreenLayoutComponent } from './shared/layouts/full-screen-layout/f
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'news',
-    pathMatch: 'full',
-  },
-  {
-    path: 'news',
     loadChildren: () => import('./features/news/news.routes').then((r) => r.NEWS_ROUTES),
   },
   {

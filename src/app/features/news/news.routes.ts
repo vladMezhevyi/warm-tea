@@ -10,6 +10,11 @@ export const NEWS_ROUTES: Routes = [
         path: '',
         loadComponent: () => import('./pages/news/news.component').then((c) => c.NewsComponent),
       },
+      {
+        path: 'comments',
+        loadComponent: () =>
+          import('./pages/comments/comments.component').then((c) => c.CommentsComponent),
+      },
     ],
   },
 ];
