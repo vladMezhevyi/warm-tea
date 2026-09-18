@@ -1,1 +1,20 @@
-<p>news works!</p>
+<mv-news-tabs />
+
+<ul>
+  @for (story of stories(); track story.id) {
+    <li>
+      <small>{{ $index + 1 }} - {{ story.id }}</small>
+      <mv-story-card [story]="story" />
+    </li>
+  }
+
+  @if (isLoading()) {
+    @for (item of skeletonItems(); track item) {
+      <li>loading - {{ item }}</li>
+    }
+  }
+</ul>
+
+@if (canLoadMore()) {
+  <button mvButton [disabled]="isLoading()" (click)="loadMore()">Load More</button>
+}

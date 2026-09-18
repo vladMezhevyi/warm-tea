@@ -1,12 +1,4 @@
-import {
-  booleanAttribute,
-  computed,
-  Directive,
-  effect,
-  ElementRef,
-  inject,
-  input,
-} from '@angular/core';
+import { computed, Directive, ElementRef, inject, input } from '@angular/core';
 
 @Directive({
   selector: 'button[mvButton], a[mvButton]',
