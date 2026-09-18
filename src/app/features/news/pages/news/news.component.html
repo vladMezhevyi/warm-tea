@@ -1,9 +1,8 @@
-<mv-news-tabs />
+<mv-news-tabs class="tabs" />
 
-<ul>
+<ul class="news-list">
   @for (story of stories(); track story.id) {
     <li>
-      <small>{{ $index + 1 }} - {{ story.id }}</small>
       <mv-story-card [story]="story" />
     </li>
   }

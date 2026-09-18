@@ -1,3 +1,33 @@
-<article class="story">
-  <h3>{{ story().title }}</h3>
+<article class="card">
+  @if (story().title; as title) {
+    @if (story().url; as url) {
+      <div class="card-heading">
+        <a class="card-title card-link" rel="noreferrer noopener" target="_blank" [href]="url">
+          {{ title }}
+        </a>
+
+        <span class="card-hostname">({{ urlHostname() }})</span>
+      </div>
+    } @else {
+      <h3 class="card-title">{{ title }}</h3>
+    }
+  }
+
+  <div class="card-meta">
+    @if (scoreText(); as text) {
+      <span>{{ text }}</span>
+    }
+
+    @if (story().by; as author) {
+      <span>by {{ author }}</span>
+    }
+
+    @if (resolvedTime(); as time) {
+      <span>{{ time }}</span>
+    }
+
+    @if (commentsText(); as text) {
+      <span>{{ text }}</span>
+    }
+  </div>
 </article>

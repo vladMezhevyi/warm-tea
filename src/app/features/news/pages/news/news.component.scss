@@ -1,0 +1,11 @@
+:host {
+  .tabs:not(:last-child) {
+    margin-bottom: var(--size-6);
+  }
+
+  .news-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4);
+  }
+}
