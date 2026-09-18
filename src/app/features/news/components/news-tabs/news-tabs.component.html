@@ -1,0 +1,9 @@
+<ul class="tabs">
+  @for (item of tabItems(); track item.type) {
+    <li>
+      <button mvButton class="tab-btn" [disabled]="item.active" (click)="onTabClick(item.type)">
+        {{ item.label }}
+      </button>
+    </li>
+  }
+</ul>
