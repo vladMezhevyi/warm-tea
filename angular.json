@@ -17,26 +17,32 @@
         },
         "@schematics/angular:directive": {
           "type": "directive",
-          "addTypeToClassName": true
+          "addTypeToClassName": true,
+          "flat": false
         },
         "@schematics/angular:service": {
           "type": "service",
-          "addTypeToClassName": true
+          "addTypeToClassName": true,
+          "flat": false
         },
         "@schematics/angular:guard": {
-          "typeSeparator": "."
+          "typeSeparator": ".",
+          "flat": false
         },
         "@schematics/angular:interceptor": {
-          "typeSeparator": "."
+          "typeSeparator": ".",
+          "flat": false
         },
         "@schematics/angular:module": {
           "typeSeparator": "."
         },
         "@schematics/angular:pipe": {
-          "typeSeparator": "."
+          "typeSeparator": ".",
+          "flat": false
         },
         "@schematics/angular:resolver": {
-          "typeSeparator": "."
+          "typeSeparator": ".",
+          "flat": false
         }
       },
       "root": "",
