@@ -24,7 +24,7 @@ export class NewsApi {
     return this.http.get<number[]>(`${this.apiUrl}/beststories.json`);
   }
 
-  getStory(id: number): Observable<Story> {
+  getStory(id: number): Observable<Story | null> {
     return this.http.get<Story>(`${this.apiUrl}/item/${id}.json`);
   }
 
