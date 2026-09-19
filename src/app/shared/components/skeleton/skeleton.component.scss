@@ -1,0 +1,22 @@
+:host {
+  display: inline-block;
+  background-color: var(--color-neutral-200);
+  width: var(--skeleton-width, 100%);
+  height: var(--skeleton-height, var(--size-8));
+  border-radius: var(--skeleton-radius, var(--radius-base));
+  animation: skeleton-pulse 1s ease-in-out infinite;
+
+  @media (prefers-reduced-motion: true) {
+    animation: none;
+  }
+
+  @keyframes skeleton-pulse {
+    0%,
+    100% {
+      background-color: var(--color-neutral-200);
+    }
+    50% {
+      background-color: var(--color-neutral-300);
+    }
+  }
+}
