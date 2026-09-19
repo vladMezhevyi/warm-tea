@@ -11,7 +11,9 @@ a[mvButton],
   --button-font-weight: var(--font-weight-medium);
   --button-line-height: var(--line-height-md);
 
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-3);
 
   background-color: var(--button-color-background);
   color: var(--button-color-foreground);
