@@ -3,10 +3,11 @@ import { NewsItem } from '../../api/news.model';
 import { SkeletonComponent } from '../../../../shared/components/skeleton/skeleton.component';
 import { ButtonDirective } from '../../../../shared/directives/button/button.directive';
 import { IconComponent } from '../../../../shared/components/icon/icon.component';
+import { StoryCardComponent } from '../story-card/story-card.component';
 
 @Component({
   selector: 'mv-stories-list',
-  imports: [SkeletonComponent, ButtonDirective, IconComponent],
+  imports: [SkeletonComponent, ButtonDirective, IconComponent, StoryCardComponent],
   templateUrl: './stories-list.component.html',
   styleUrl: './stories-list.component.scss',
 })

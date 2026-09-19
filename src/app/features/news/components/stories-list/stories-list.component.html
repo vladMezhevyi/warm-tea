@@ -6,8 +6,11 @@
   <ul class="list">
     @for (item of items(); track item.id) {
       <li>
-        <small>{{ item.type }} - {{ item.id }}</small>
-        <h3>{{ item.title }}</h3>
+        @switch (item.type) {
+          @case ('story') {
+            <mv-story-card [story]="item" />
+          }
+        }
       </li>
     }
 
