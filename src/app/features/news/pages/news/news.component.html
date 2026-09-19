@@ -1,18 +1,22 @@
 <mv-news-tabs class="tabs" />
 
-<ul class="news-list">
-  @for (story of stories(); track story.id) {
-    <li>
-      <mv-story-card [story]="story" />
-    </li>
-  }
-
-  @if (isLoading()) {
-    @for (item of skeletonItems(); track item) {
-      <li>loading - {{ item }}</li>
+@if (error(); as error) {
+  <p>{{ error }}</p>
+} @else {
+  <ul class="news-list">
+    @for (story of stories(); track story.id) {
+      <li>
+        <mv-story-card [story]="story" />
+      </li>
     }
-  }
-</ul>
+
+    @if (isLoading()) {
+      @for (item of skeletonItems(); track item) {
+        <li>loading - {{ item }}</li>
+      }
+    }
+  </ul>
+}
 
 @if (canLoadMore()) {
   <button mvButton [disabled]="isLoading()" (click)="loadMore()">Load More</button>

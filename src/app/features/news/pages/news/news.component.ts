@@ -19,6 +19,7 @@ export class NewsComponent {
   protected readonly isLoading = this.store.isLoading;
   protected readonly perPage = this.store.perPage;
   protected readonly canLoadMore = this.store.canLoadMore;
+  protected readonly error = this.store.error;
 
   protected readonly skeletonItems = computed<number[]>(() =>
     Array.from({ length: this.perPage() }, (_, i) => i),

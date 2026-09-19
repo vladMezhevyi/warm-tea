@@ -9,7 +9,7 @@ import {
 import { Story } from '../../api/news.model';
 import { computed, inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { pipe, switchMap, tap } from 'rxjs';
+import { catchError, EMPTY, pipe, switchMap, tap } from 'rxjs';
 import { NewsRepository } from './news.repository';
 
 export type StoryType = 'new' | 'top' | 'best';
@@ -20,31 +20,27 @@ interface NewsState {
   isLoading: boolean;
   perPage: number;
   type: StoryType;
-  first: number;
-  last: number;
+  nextIDIndex: number;
+  error: string | null;
 }
 
-const initialState = (): NewsState => {
-  const perPage = 25;
-
-  return {
-    perPage,
-    stories: [],
-    totalIDs: 0,
-    isLoading: false,
-    type: 'new',
-    first: 0,
-    last: perPage,
-  };
+const initialState: NewsState = {
+  perPage: 2,
+  stories: [],
+  totalIDs: 0,
+  isLoading: false,
+  type: 'new',
+  nextIDIndex: 0,
+  error: null,
 };
 
 export const NewsStore = signalStore(
-  withState(initialState()),
+  withState(initialState),
 
   withProps(() => ({ repository: inject(NewsRepository) })),
 
-  withComputed(({ totalIDs, stories }) => ({
-    canLoadMore: computed(() => stories().length < totalIDs()),
+  withComputed(({ totalIDs, stories, error }) => ({
+    canLoadMore: computed<boolean>(() => !error() && stories().length < totalIDs()),
   })),
 
   withMethods(({ repository, ...store }) => ({
@@ -52,13 +48,19 @@ export const NewsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(() => {
-          const { type, first, last } = store;
-          return repository.getStories(type(), first(), last());
+          const { type, nextIDIndex, perPage } = store;
+          return repository.getStories(type(), nextIDIndex(), perPage()).pipe(
+            catchError(() => {
+              patchState(store, { isLoading: false, error: 'Failed to load stories.' });
+              return EMPTY;
+            }),
+          );
         }),
-        tap(({ stories, totalIDs }) =>
+        tap(({ stories, totalIDs, nextIDIndex }) =>
           patchState(store, (state) => ({
             ...state,
             totalIDs,
+            nextIDIndex,
             isLoading: false,
             stories: [...state.stories, ...stories],
           })),
@@ -69,15 +71,12 @@ export const NewsStore = signalStore(
 
   withMethods((store) => ({
     updateType: (type: StoryType) => {
-      patchState(store, { ...initialState(), type });
+      patchState(store, { ...initialState, type });
       store.loadStories();
     },
 
     loadMore: () => {
-      const first = store.last();
-      const last = first + store.perPage();
-
-      patchState(store, { first, last });
+      if (!store.canLoadMore()) return;
       store.loadStories();
     },
   })),
