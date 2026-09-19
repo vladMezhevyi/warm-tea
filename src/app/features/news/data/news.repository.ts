@@ -1,5 +1,4 @@
-import { inject, Injectable, Injector, Type } from '@angular/core';
-import { StoryType } from './news.store';
+import { inject, Injectable } from '@angular/core';
 import {
   catchError,
   EMPTY,
@@ -13,38 +12,25 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import {
-  BestStoriesStrategy,
-  NewStoriesStrategy,
-  StoryStrategy,
-  TopStoriesStrategy,
-} from './story.strategy';
-import { Story } from '../../api/news.model';
-import { NewsApi } from '../../api/news.api';
+import { NEWS_STRATEGY } from './news-strategy.token';
+import { NewsItem } from '../api/news.model';
 
 interface GetStoriesResponse {
-  stories: Story[];
+  items: NewsItem[];
   totalIDs: number;
   nextIDIndex: number;
 }
 
 @Injectable()
 export class NewsRepository {
-  private readonly injector = inject(Injector);
-  private readonly api = inject(NewsApi);
+  private readonly strategy = inject(NEWS_STRATEGY);
 
-  private readonly strategies: Record<StoryType, Type<StoryStrategy>> = {
-    new: NewStoriesStrategy,
-    top: TopStoriesStrategy,
-    best: BestStoriesStrategy,
-  };
+  private cache: number[] | null = null;
 
-  private readonly cache = new Map<StoryType, number[]>();
-
-  getStories(type: StoryType, start: number, count: number): Observable<GetStoriesResponse> {
-    return this.getIDs(type).pipe(
+  getItems(start: number, count: number): Observable<GetStoriesResponse> {
+    return this.getIDs().pipe(
       switchMap((ids) =>
-        of({ cursor: start, collected: [] as Story[], failedCount: 0 }).pipe(
+        of({ cursor: start, collected: [] as NewsItem[], failedCount: 0 }).pipe(
           expand(({ cursor, collected, failedCount }) => {
             if (failedCount >= 3) {
               return throwError(() => new Error('Too many failed attempts while loading stories.'));
@@ -57,7 +43,7 @@ export class NewsRepository {
 
             return forkJoin(
               chunk.map((id) =>
-                this.api.getStory(id).pipe(
+                this.strategy.getItem(id).pipe(
                   map((story) => ({ ok: true, story })),
                   catchError(() => of({ ok: false, story: null })),
                 ),
@@ -79,7 +65,7 @@ export class NewsRepository {
           }),
           last(),
           map(({ collected, cursor }) => ({
-            stories: collected,
+            items: collected,
             totalIDs: ids.length,
             nextIDIndex: cursor,
           })),
@@ -88,13 +74,8 @@ export class NewsRepository {
     );
   }
 
-  private getIDs(type: StoryType): Observable<number[]> {
-    const cachedIDs = this.cache.get(type);
-    if (this.cache.has(type) && cachedIDs?.length) {
-      return of(cachedIDs);
-    }
-
-    const strategy = this.injector.get(this.strategies[type]);
-    return strategy.getIDs().pipe(tap((ids) => this.cache.set(type, ids)));
+  private getIDs(): Observable<number[]> {
+    if (this.cache?.length) return of(this.cache);
+    return this.strategy.getIDs().pipe(tap((ids) => (this.cache = ids)));
   }
 }

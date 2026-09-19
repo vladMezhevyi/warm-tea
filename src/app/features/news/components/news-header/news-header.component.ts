@@ -15,12 +15,28 @@ interface NavItem {
 export class NewsHeaderComponent {
   protected readonly navItems: NavItem[] = [
     {
-      route: '/',
-      label: 'News',
+      route: '/new',
+      label: 'New',
     },
     {
-      route: '/comments',
-      label: 'Comments',
+      route: '/top',
+      label: 'Top',
+    },
+    {
+      route: '/best',
+      label: 'Best',
+    },
+    {
+      route: '/ask',
+      label: 'Ask',
+    },
+    {
+      route: '/show',
+      label: 'Show',
+    },
+    {
+      route: '/jobs',
+      label: 'Jobs',
     },
   ];
 }

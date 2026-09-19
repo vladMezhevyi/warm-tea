@@ -1,13 +1,29 @@
-export type NewsType = 'story' | 'comment' | 'job' | 'poll' | 'pollopt';
+export type NewsType = 'story' | 'job';
 
-export interface Story {
+interface NewsItemBase {
   id: number;
   by?: string;
+  time?: number;
+  deleted?: boolean;
+  dead?: boolean;
+}
+
+export interface Story extends NewsItemBase {
+  type: 'story';
   descendants?: number;
   kids?: number[];
   score?: number;
-  time?: number;
   title?: string;
-  type?: NewsType;
+  url?: string;
+  text?: string;
+}
+
+export interface Job extends NewsItemBase {
+  type: 'job';
+  score?: number;
+  text?: string;
+  title?: string;
   url?: string;
 }
+
+export type NewsItem = Story | Job;
