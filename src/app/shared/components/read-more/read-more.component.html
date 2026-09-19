@@ -1,0 +1,32 @@
+@if (html()) {
+  <div
+    #content
+    class="content"
+    [id]="contentID"
+    [class.collapsed]="!expanded()"
+    [style.--read-more-max-lines]="maxLines()"
+    [innerHTML]="html()"
+  ></div>
+} @else {
+  <p
+    #content
+    class="content"
+    [id]="contentID"
+    [class.collapsed]="!expanded()"
+    [style.--read-more-max-lines]="maxLines()"
+  >
+    {{ text() }}
+  </p>
+}
+
+@if (isTruncated()) {
+  <button
+    type="button"
+    class="toggle"
+    [attr.aria-expanded]="expanded()"
+    [attr.aria-controls]="contentID"
+    (click)="toggle()"
+  >
+    {{ expanded() ? 'Read less' : 'Read more' }}
+  </button>
+}

@@ -1,0 +1,10 @@
+<mv-stories-list
+  [stories]="stories()"
+  [isLoading]="isLoading()"
+  [perPage]="perPage()"
+  [isEmpty]="isEmpty()"
+  [reachedEnd]="reachedEnd()"
+  [canLoadMore]="canLoadMore()"
+  [error]="error()"
+  (loadMore)="loadMore()"
+/>

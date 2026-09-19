@@ -13,30 +13,36 @@
         "@schematics/angular:component": {
           "style": "scss",
           "type": "component",
-          "addTypeToClassName": false
+          "addTypeToClassName": true
         },
         "@schematics/angular:directive": {
           "type": "directive",
-          "addTypeToClassName": false
+          "addTypeToClassName": true,
+          "flat": false
         },
         "@schematics/angular:service": {
           "type": "service",
-          "addTypeToClassName": false
+          "addTypeToClassName": true,
+          "flat": false
         },
         "@schematics/angular:guard": {
-          "typeSeparator": "."
+          "typeSeparator": ".",
+          "flat": false
         },
         "@schematics/angular:interceptor": {
-          "typeSeparator": "."
+          "typeSeparator": ".",
+          "flat": false
         },
         "@schematics/angular:module": {
           "typeSeparator": "."
         },
         "@schematics/angular:pipe": {
-          "typeSeparator": "."
+          "typeSeparator": ".",
+          "flat": false
         },
         "@schematics/angular:resolver": {
-          "typeSeparator": "."
+          "typeSeparator": ".",
+          "flat": false
         }
       },
       "root": "",
@@ -55,7 +61,10 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"]
+            "styles": ["src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles"]
+            }
           },
           "configurations": {
             "production": {
@@ -76,7 +85,13 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
