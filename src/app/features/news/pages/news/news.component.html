@@ -3,29 +3,11 @@
 @if (error(); as error) {
   <p role="alert">{{ error }}</p>
 } @else {
-  <ul class="news-list" [attr.aria-busy]="isLoading()">
-    <li class="sr-only" aria-live="polite">
-      {{ isLoading() ? 'Loading stories' : '' }}
-    </li>
-
-    @for (story of stories(); track story.id) {
-      <li>
-        <mv-story-card [story]="story" />
-      </li>
-    }
-
-    @if (isLoading()) {
-      @for (item of skeletonItems(); track item) {
-        <li>
-          <mv-skeleton height="94px" />
-        </li>
-      }
-    }
-  </ul>
-}
-
-@if (canLoadMore()) {
-  <div class="news-bottom">
-    <button mvButton [disabled]="isLoading()" (click)="loadMore()">Load More</button>
-  </div>
+  <mv-news-list
+    [stories]="stories()"
+    [isLoading]="isLoading()"
+    [perPage]="perPage()"
+    [atLimit]="atLimit()"
+    (loadMore)="loadMore()"
+  />
 }

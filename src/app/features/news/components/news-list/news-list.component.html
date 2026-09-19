@@ -1,0 +1,29 @@
+<div class="list-container">
+  <span class="sr-only" aria-live="polite">
+    {{ isLoading() ? 'Loading stories' : '' }}
+  </span>
+
+  <ul class="list" [attr.aria-busy]="isLoading()">
+    @for (story of stories(); track story.id) {
+      <li>
+        <mv-story-card [story]="story" />
+      </li>
+    }
+
+    @if (isLoading()) {
+      @for (item of skeletonItems(); track item) {
+        <li>
+          <mv-skeleton height="94px" />
+        </li>
+      }
+    }
+  </ul>
+</div>
+
+<div class="load-more-container">
+  @if (atLimit()) {
+    <span class="limit-label">You've reached the end</span>
+  } @else if (!isLoading()) {
+    <button mvButton (click)="loadMore.emit()">Load More</button>
+  }
+</div>

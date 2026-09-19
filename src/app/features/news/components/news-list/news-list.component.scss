@@ -1,0 +1,20 @@
+:host {
+  display: block;
+
+  .list-container:not(:last-child) {
+    margin-bottom: var(--size-4);
+  }
+
+  .list > li:not(:last-child) {
+    margin-bottom: var(--size-4);
+  }
+
+  .load-more-container {
+    text-align: center;
+  }
+
+  .limit-label {
+    color: var(--color-muted);
+    font-weight: var(--font-weight-medium);
+  }
+}

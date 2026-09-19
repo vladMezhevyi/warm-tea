@@ -39,8 +39,9 @@ export const NewsStore = signalStore(
 
   withProps(() => ({ repository: inject(NewsRepository) })),
 
-  withComputed(({ totalIDs, stories, error }) => ({
+  withComputed(({ totalIDs, stories, error, nextIDIndex }) => ({
     canLoadMore: computed<boolean>(() => !error() && stories().length < totalIDs()),
+    atLimit: computed<boolean>(() => nextIDIndex() >= totalIDs()),
   })),
 
   withMethods(({ repository, ...store }) => ({
