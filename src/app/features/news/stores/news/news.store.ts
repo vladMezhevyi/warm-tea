@@ -25,7 +25,7 @@ interface NewsState {
 }
 
 const initialState: NewsState = {
-  perPage: 2,
+  perPage: 25,
   stories: [],
   totalIDs: 0,
   isLoading: false,

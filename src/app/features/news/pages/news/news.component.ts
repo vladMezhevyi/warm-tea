@@ -4,10 +4,11 @@ import { ButtonDirective } from '../../../../shared/directives/button/button.dir
 import { NewsTabsComponent } from '../../components/news-tabs/news-tabs.component';
 import { StoryCardComponent } from '../../components/story-card/story-card.component';
 import { NewsRepository } from '../../stores/news/news.repository';
+import { SkeletonComponent } from '../../../../shared/components/skeleton/skeleton.component';
 
 @Component({
   selector: 'mv-news',
-  imports: [ButtonDirective, NewsTabsComponent, StoryCardComponent],
+  imports: [ButtonDirective, NewsTabsComponent, StoryCardComponent, SkeletonComponent],
   providers: [NewsRepository, NewsStore],
   templateUrl: './news.component.html',
   styleUrl: './news.component.scss',
