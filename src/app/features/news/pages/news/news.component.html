@@ -19,5 +19,7 @@
 }
 
 @if (canLoadMore()) {
-  <button mvButton [disabled]="isLoading()" (click)="loadMore()">Load More</button>
+  <div class="news-bottom">
+    <button mvButton [disabled]="isLoading()" (click)="loadMore()">Load More</button>
+  </div>
 }

@@ -7,5 +7,13 @@
     display: flex;
     flex-direction: column;
     gap: var(--size-4);
+
+    &:not(:last-child) {
+      margin-bottom: var(--size-4);
+    }
+  }
+
+  .news-bottom {
+    text-align: center;
   }
 }
