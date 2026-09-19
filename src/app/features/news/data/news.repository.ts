@@ -13,10 +13,10 @@ import {
   throwError,
 } from 'rxjs';
 import { NEWS_STRATEGY } from './news-strategy.token';
-import { NewsItem } from '../api/news.model';
+import { Story } from '../api/news.model';
 
 interface GetStoriesResponse {
-  items: NewsItem[];
+  stories: Story[];
   totalIDs: number;
   nextIDIndex: number;
 }
@@ -27,10 +27,10 @@ export class NewsRepository {
 
   private cache: number[] | null = null;
 
-  getItems(start: number, count: number): Observable<GetStoriesResponse> {
+  getStories(start: number, count: number): Observable<GetStoriesResponse> {
     return this.getIDs().pipe(
       switchMap((ids) =>
-        of({ cursor: start, collected: [] as NewsItem[], failedCount: 0 }).pipe(
+        of({ cursor: start, collected: [] as Story[], failedCount: 0 }).pipe(
           expand(({ cursor, collected, failedCount }) => {
             if (failedCount >= 3) {
               return throwError(() => new Error('Too many failed attempts while loading stories.'));
@@ -43,7 +43,7 @@ export class NewsRepository {
 
             return forkJoin(
               chunk.map((id) =>
-                this.strategy.getItem(id).pipe(
+                this.strategy.getStory(id).pipe(
                   map((story) => ({ ok: true, story })),
                   catchError(() => of({ ok: false, story: null })),
                 ),
@@ -65,7 +65,7 @@ export class NewsRepository {
           }),
           last(),
           map(({ collected, cursor }) => ({
-            items: collected,
+            stories: collected,
             totalIDs: ids.length,
             nextIDIndex: cursor,
           })),

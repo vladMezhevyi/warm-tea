@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NewsApi } from '../api/news.api';
-import { NewsItem } from '../api/news.model';
+import { Story } from '../api/news.model';
 
 export interface NewsStrategy {
   getIDs(): Observable<number[]>;
-  getItem(id: number): Observable<NewsItem | null>;
+  getStory(id: number): Observable<Story | null>;
 }
 
 export abstract class NewsStrategyBase implements NewsStrategy {
@@ -13,8 +13,8 @@ export abstract class NewsStrategyBase implements NewsStrategy {
 
   abstract getIDs(): Observable<number[]>;
 
-  getItem(id: number): Observable<NewsItem | null> {
-    return this.api.getItem(id);
+  getStory(id: number): Observable<Story | null> {
+    return this.api.getStory(id);
   }
 }
 

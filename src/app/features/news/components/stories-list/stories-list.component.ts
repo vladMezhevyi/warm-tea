@@ -1,5 +1,5 @@
 import { Component, computed, input, output } from '@angular/core';
-import { NewsItem } from '../../api/news.model';
+import { Story } from '../../api/news.model';
 import { SkeletonComponent } from '../../../../shared/components/skeleton/skeleton.component';
 import { ButtonDirective } from '../../../../shared/directives/button/button.directive';
 import { IconComponent } from '../../../../shared/components/icon/icon.component';
@@ -12,7 +12,7 @@ import { StoryCardComponent } from '../story-card/story-card.component';
   styleUrl: './stories-list.component.scss',
 })
 export class StoriesListComponent {
-  readonly items = input.required<NewsItem[]>();
+  readonly stories = input.required<Story[]>();
   readonly perPage = input.required<number>();
   readonly isLoading = input<boolean>(false);
   readonly isEmpty = input<boolean>(false);

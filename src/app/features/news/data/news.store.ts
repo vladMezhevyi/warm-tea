@@ -10,10 +10,10 @@ import { computed, inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, pipe, switchMap, tap } from 'rxjs';
 import { NewsRepository } from './news.repository';
-import { NewsItem } from '../api/news.model';
+import { Story } from '../api/news.model';
 
 interface NewsState {
-  items: NewsItem[];
+  stories: Story[];
   totalIDs: number;
   isLoading: boolean;
   perPage: number;
@@ -23,7 +23,7 @@ interface NewsState {
 
 const initialState: NewsState = {
   perPage: 25,
-  items: [],
+  stories: [],
   totalIDs: 0,
   isLoading: false,
   nextIDIndex: 0,
@@ -35,11 +35,11 @@ export const NewsStore = signalStore(
 
   withProps(() => ({ repository: inject(NewsRepository) })),
 
-  withComputed(({ totalIDs, items, error, isLoading }) => ({
-    canLoadMore: computed<boolean>(() => items().length < totalIDs()),
-    isEmpty: computed<boolean>(() => !isLoading() && !error() && !items().length),
+  withComputed(({ totalIDs, stories, error, isLoading }) => ({
+    canLoadMore: computed<boolean>(() => stories().length < totalIDs()),
+    isEmpty: computed<boolean>(() => !isLoading() && !error() && !stories().length),
     reachedEnd: computed<boolean>(
-      () => !isLoading() && items().length > 0 && items().length >= totalIDs(),
+      () => !isLoading() && stories().length > 0 && stories().length >= totalIDs(),
     ),
   })),
 
@@ -49,20 +49,20 @@ export const NewsStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(() => {
           const { nextIDIndex, perPage } = store;
-          return repository.getItems(nextIDIndex(), perPage()).pipe(
+          return repository.getStories(nextIDIndex(), perPage()).pipe(
             catchError(() => {
               patchState(store, { isLoading: false, error: 'Failed to load stories.' });
               return EMPTY;
             }),
           );
         }),
-        tap(({ items, totalIDs, nextIDIndex }) =>
+        tap(({ stories, totalIDs, nextIDIndex }) =>
           patchState(store, (state) => ({
             ...state,
             totalIDs,
             nextIDIndex,
             isLoading: false,
-            items: [...state.items, ...items],
+            stories: [...state.stories, ...stories],
           })),
         ),
       ),

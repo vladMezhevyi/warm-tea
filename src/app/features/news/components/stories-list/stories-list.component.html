@@ -4,13 +4,9 @@
   </span>
 
   <ul class="list">
-    @for (item of items(); track item.id) {
+    @for (story of stories(); track story.id) {
       <li>
-        @switch (item.type) {
-          @case ('story') {
-            <mv-story-card [story]="item" />
-          }
-        }
+        <mv-story-card [story]="story" />
       </li>
     }
 

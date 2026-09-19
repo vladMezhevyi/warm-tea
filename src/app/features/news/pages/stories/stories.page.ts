@@ -1,7 +1,6 @@
-import { Component, computed, effect, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { NewsStore } from '../../data/news.store';
 import { NewsRepository } from '../../data/news.repository';
-import { SkeletonComponent } from '../../../../shared/components/skeleton/skeleton.component';
 import { StoriesListComponent } from '../../components/stories-list/stories-list.component';
 
 @Component({
@@ -16,14 +15,14 @@ export class StoriesPage {
 
   protected readonly error = this.store.error;
   protected readonly isLoading = this.store.isLoading;
-  protected readonly items = this.store.items;
+  protected readonly stories = this.store.stories;
   protected readonly perPage = this.store.perPage;
   protected readonly canLoadMore = this.store.canLoadMore;
   protected readonly reachedEnd = this.store.reachedEnd;
   protected readonly isEmpty = this.store.isEmpty;
 
   constructor() {
-    effect(() => console.log({ items: this.store.items() }));
+    effect(() => console.log({ stories: this.store.stories() }));
 
     this.store.loadItems();
   }

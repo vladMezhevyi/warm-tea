@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { NewsItem, Story } from './news.model';
+import { Story } from './news.model';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +36,7 @@ export class NewsApi {
     return this.http.get<number[]>(`${this.apiUrl}/jobstories.json`);
   }
 
-  getItem(id: number): Observable<NewsItem | null> {
+  getStory(id: number): Observable<Story | null> {
     return this.http.get<Story>(`${this.apiUrl}/item/${id}.json`);
   }
 
