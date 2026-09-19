@@ -1,9 +1,11 @@
 import { Component, computed, input } from '@angular/core';
 import { Story } from '../../api/news.model';
 import { timeAgo } from '../../../../shared/utils/time-ago';
+import { ReadMoreComponent } from '../../../../shared/components/read-more/read-more.component';
 
 @Component({
   selector: 'mv-story-card',
+  imports: [ReadMoreComponent],
   templateUrl: './story-card.component.html',
   styleUrl: './story-card.component.scss',
 })

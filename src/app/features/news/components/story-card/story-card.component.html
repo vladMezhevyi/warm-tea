@@ -13,6 +13,10 @@
     }
   }
 
+  @if (story().text; as text) {
+    <mv-read-more [html]="text" [maxLines]="2" />
+  }
+
   <div class="card-meta">
     @if (scoreText(); as text) {
       <span>{{ text }}</span>
