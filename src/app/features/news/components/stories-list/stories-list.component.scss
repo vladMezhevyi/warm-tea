@@ -1,0 +1,35 @@
+:host {
+  flex: 1;
+
+  .list-container:not(:last-child) {
+    margin-bottom: var(--size-6);
+  }
+
+  .list {
+    display: block;
+
+    & > li:not(:last-child) {
+      margin-bottom: var(--size-4);
+    }
+  }
+
+  .message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--size-3);
+
+    color: var(--color-muted);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-lg);
+
+    &.error {
+      color: var(--color-danger);
+    }
+  }
+
+  .list-bottom {
+    text-align: center;
+  }
+}

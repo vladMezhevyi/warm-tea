@@ -12,14 +12,11 @@ import { catchError, EMPTY, pipe, switchMap, tap } from 'rxjs';
 import { NewsRepository } from './news.repository';
 import { NewsItem } from '../api/news.model';
 
-export type StoryType = 'new' | 'top' | 'best';
-
 interface NewsState {
   items: NewsItem[];
   totalIDs: number;
   isLoading: boolean;
   perPage: number;
-  type: StoryType;
   nextIDIndex: number;
   error: string | null;
 }
@@ -29,7 +26,6 @@ const initialState: NewsState = {
   items: [],
   totalIDs: 0,
   isLoading: false,
-  type: 'new',
   nextIDIndex: 0,
   error: null,
 };
@@ -39,9 +35,12 @@ export const NewsStore = signalStore(
 
   withProps(() => ({ repository: inject(NewsRepository) })),
 
-  withComputed(({ totalIDs, items, error, nextIDIndex }) => ({
-    canLoadMore: computed<boolean>(() => !error() && items().length < totalIDs()),
-    atLimit: computed<boolean>(() => nextIDIndex() >= totalIDs()),
+  withComputed(({ totalIDs, items, error, isLoading }) => ({
+    canLoadMore: computed<boolean>(() => items().length < totalIDs()),
+    isEmpty: computed<boolean>(() => !isLoading() && !error() && !items().length),
+    reachedEnd: computed<boolean>(
+      () => !isLoading() && items().length > 0 && items().length >= totalIDs(),
+    ),
   })),
 
   withMethods(({ repository, ...store }) => ({
@@ -71,13 +70,7 @@ export const NewsStore = signalStore(
   })),
 
   withMethods((store) => ({
-    updateType: (type: StoryType) => {
-      patchState(store, { ...initialState, type });
-      store.loadItems();
-    },
-
     loadMore: () => {
-      if (!store.canLoadMore()) return;
       store.loadItems();
     },
   })),

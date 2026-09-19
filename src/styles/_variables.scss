@@ -26,6 +26,18 @@
   --color-neutral-900: hsl(0, 0%, 9%);
   --color-neutral-950: hsl(0, 0%, 4%);
 
+  --color-red-50: hsl(0, 86%, 97%);
+  --color-red-100: hsl(0, 100%, 94%);
+  --color-red-200: hsl(0, 100%, 89%);
+  --color-red-300: hsl(0, 100%, 82%);
+  --color-red-400: hsl(359, 100%, 70%);
+  --color-red-500: hsl(357, 96%, 58%);
+  --color-red-600: hsl(357, 100%, 45%);
+  --color-red-700: hsl(358, 100%, 38%);
+  --color-red-800: hsl(356, 92%, 33%);
+  --color-red-900: hsl(359, 69%, 30%);
+  --color-red-950: hsl(359, 79%, 15%);
+
   --font-size-xs: 0.75rem; // 12px
   --font-size-sm: 0.875rem; // 14px
   --font-size-md: 1rem; // 16px
@@ -106,4 +118,5 @@
   --color-primary-hover: var(--color-emerald-600);
 
   --color-muted: var(--color-neutral-600);
+  --color-danger: var(--color-red-600);
 }
