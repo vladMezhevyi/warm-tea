@@ -1,6 +1,7 @@
 @use './styles/normalize';
 @use './styles/variables';
 @use './styles/components/button';
+@use '@phosphor-icons/web/regular';
 
 body {
   background-color: var(--color-background);
