@@ -1,13 +1,15 @@
 <header class="header">
   <a class="logo" routerLink="/">MV News</a>
 
-  <button mvButton aria-label="Show sidenav" (click)="openSidenav()">
-    <mv-icon name="list" />
-  </button>
-
-  <nav aria-label="News" class="nav">
-    @for (item of navItems; track item.route) {
-      <mv-news-nav-item [item]="item" />
-    }
-  </nav>
+  @if (showSidenav()) {
+    <button mvButton aria-label="Show sidenav" (click)="openSidenav()">
+      <mv-icon name="list" />
+    </button>
+  } @else {
+    <nav aria-label="News" class="nav">
+      @for (item of navItems; track item.route) {
+        <mv-news-nav-item [item]="item" />
+      }
+    </nav>
+  }
 </header>

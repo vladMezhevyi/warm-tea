@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NewsStore } from '../../data/news.store';
 import { NewsRepository } from '../../data/news.repository';
 import { StoriesListComponent } from '../../components/stories-list/stories-list.component';
@@ -22,8 +22,6 @@ export class StoriesPage {
   protected readonly isEmpty = this.store.isEmpty;
 
   constructor() {
-    effect(() => console.log({ stories: this.store.stories() }));
-
     this.store.loadItems();
   }
 
