@@ -4,10 +4,17 @@ import { SkeletonComponent } from '../../../../shared/components/skeleton/skelet
 import { IconComponent } from '../../../../shared/components/icon/icon.component';
 import { StoryCardComponent } from '../story-card/story-card.component';
 import { InfiniteScrollDirective } from '../../../../shared/directives/infinite-scroll/infinite-scroll.directive';
+import { ButtonDirective } from '../../../../shared/directives/button/button.directive';
 
 @Component({
   selector: 'mv-stories-list',
-  imports: [SkeletonComponent, IconComponent, StoryCardComponent, InfiniteScrollDirective],
+  imports: [
+    SkeletonComponent,
+    IconComponent,
+    StoryCardComponent,
+    InfiniteScrollDirective,
+    ButtonDirective,
+  ],
   templateUrl: './stories-list.component.html',
   styleUrl: './stories-list.component.scss',
 })
@@ -25,4 +32,8 @@ export class StoriesListComponent {
   protected readonly skeletonItems = computed<number[]>(() =>
     Array.from({ length: this.perPage() }, (_, i) => i),
   );
+
+  protected onLoadMore(): void {
+    this.loadMore.emit();
+  }
 }

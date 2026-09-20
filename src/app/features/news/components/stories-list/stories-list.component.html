@@ -38,5 +38,7 @@
 </div>
 
 @if (canLoadMore()) {
-  <span mvInfiniteScroll (inView)="loadMore.emit()"></span>
+  <button mvButton mvInfiniteScroll (click)="onLoadMore()" (inView)="onLoadMore()">
+    Load More
+  </button>
 }
