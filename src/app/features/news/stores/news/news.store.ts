@@ -9,8 +9,8 @@ import {
 import { computed, inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, pipe, switchMap, tap } from 'rxjs';
-import { NewsRepository } from '../repositories/news/news.repository';
-import { Story } from '../api/news.model';
+import { NewsRepository } from '../../repositories/news/news.repository';
+import { Story } from '../../api/news.model';
 
 interface NewsState {
   stories: Story[];
