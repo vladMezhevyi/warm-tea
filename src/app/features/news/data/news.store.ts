@@ -9,7 +9,7 @@ import {
 import { computed, inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, pipe, switchMap, tap } from 'rxjs';
-import { NewsRepository } from './news.repository';
+import { NewsRepository } from '../repositories/news-repository/news.repository';
 import { Story } from '../api/news.model';
 
 interface NewsState {

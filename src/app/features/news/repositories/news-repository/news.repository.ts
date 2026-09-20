@@ -12,8 +12,8 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import { NEWS_STRATEGY } from '../tokens/news-strategy.token';
-import { Story } from '../api/news.model';
+import { NEWS_STRATEGY } from '../../tokens/news-strategy.token';
+import { Story } from '../../api/news.model';
 
 interface GetStoriesResponse {
   stories: Story[];

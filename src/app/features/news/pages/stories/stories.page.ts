@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { NewsStore } from '../../data/news.store';
-import { NewsRepository } from '../../data/news.repository';
+import { NewsRepository } from '../../repositories/news-repository/news.repository';
 import { StoriesListComponent } from '../../components/stories-list/stories-list.component';
 
 @Component({
