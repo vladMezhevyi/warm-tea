@@ -19,20 +19,6 @@ export class ThemeService {
 
   constructor() {
     this.renderer = this.rendererFactory.createRenderer(null, null);
-    this.init();
-  }
-
-  private init(): void {
-    const savedTheme = this.getSavedTheme();
-    const prefersDark = window.matchMedia(this.prefersDarkScheme).matches;
-
-    const initialTheme = savedTheme ?? (prefersDark ? 'dark' : 'light');
-    this.setTheme(initialTheme);
-
-    window.matchMedia(this.prefersDarkScheme).addEventListener('change', (e) => {
-      if (savedTheme) return;
-      this.setTheme(e.matches ? 'dark' : 'light');
-    });
   }
 
   setTheme(theme: Theme): void {
@@ -43,6 +29,19 @@ export class ThemeService {
 
   toggleTheme(): void {
     this.setTheme(this.currentTheme() === 'dark' ? 'light' : 'dark');
+  }
+
+  init(): void {
+    const savedTheme = this.getSavedTheme();
+    const prefersDark = window.matchMedia(this.prefersDarkScheme).matches;
+
+    const initialTheme = savedTheme ?? (prefersDark ? 'dark' : 'light');
+    this.setTheme(initialTheme);
+
+    window.matchMedia(this.prefersDarkScheme).addEventListener('change', (e) => {
+      if (savedTheme) return;
+      this.setTheme(e.matches ? 'dark' : 'light');
+    });
   }
 
   private applyTheme(theme: Theme): void {
