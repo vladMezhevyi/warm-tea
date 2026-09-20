@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ButtonDirective } from '../../../../shared/directives/button/button.directive';
 import { IconComponent } from '../../../../shared/components/icon/icon.component';
@@ -23,6 +23,14 @@ export class NewsHeaderComponent {
   protected readonly showSidenav = toSignal<boolean>(
     this.breakpointObserver.observe(`(max-width: 585px)`).pipe(map((state) => state.matches)),
   );
+
+  constructor() {
+    effect(() => {
+      if (!this.showSidenav()) {
+        this.navigation.closeSidenav();
+      }
+    });
+  }
 
   protected openSidenav(): void {
     this.navigation.openSidenav();
