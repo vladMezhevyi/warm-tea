@@ -111,6 +111,7 @@
 
   --color-foreground: var(--color-neutral-900);
   --color-background: var(--color-neutral-50);
+  --color-panel: var(--color-neutral-100);
   --color-border: var(--color-neutral-400);
 
   --color-primary: var(--color-emerald-700);
@@ -124,6 +125,7 @@
 .dark {
   --color-foreground: var(--color-neutral-50);
   --color-background: var(--color-neutral-950);
+  --color-panel: var(--color-neutral-900);
   --color-border: var(--color-neutral-600);
   --color-muted: var(--color-neutral-400);
 
