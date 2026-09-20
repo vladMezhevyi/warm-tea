@@ -1,15 +1,18 @@
 button[mvButton],
 a[mvButton],
 .mv-button {
+  --button-height-md: var(--size-6);
+  --button-font-size-md: var(--font-size-base);
+
+  --button-height: var(--button-height-md);
+  --button-font-size: var(--button-font-size-md);
+  --button-font-weight: var(--font-weight-medium);
+  --button-padding-x: calc(var(--button-height) / 2);
+
   --button-color-background: var(--color-primary);
   --button-color-background-hover: var(--color-primary-hover);
   --button-color-foreground: var(--color-primary-foreground);
-  --button-spacing-y: var(--size-2);
-  --button-spacing-x: var(--size-4);
   --button-radius: var(--radius-base);
-  --button-font-size: var(--font-size-md);
-  --button-font-weight: var(--font-weight-medium);
-  --button-line-height: var(--line-height-md);
 
   display: inline-flex;
   align-items: center;
@@ -20,9 +23,10 @@ a[mvButton],
   color: var(--button-color-foreground);
   font-size: var(--button-font-size);
   font-weight: var(--button-font-weight);
-  line-height: var(--button-line-height);
+  line-height: 1;
 
-  padding: var(--button-spacing-y) var(--button-spacing-x);
+  min-height: var(--button-height);
+  padding-inline: var(--button-padding-x);
   border-radius: var(--button-radius);
 
   cursor: pointer;
@@ -41,5 +45,10 @@ a[mvButton],
   &[aria-disabled='true'] {
     cursor: not-allowed;
     opacity: 0.7;
+  }
+
+  &:has(> mv-icon:only-child) {
+    aspect-ratio: 1;
+    padding-inline: 0;
   }
 }
