@@ -120,3 +120,14 @@
   --color-muted: var(--color-neutral-600);
   --color-danger: var(--color-red-600);
 }
+
+.dark {
+  --color-foreground: var(--color-neutral-50);
+  --color-background: var(--color-neutral-950);
+  --color-border: var(--color-neutral-600);
+  --color-muted: var(--color-neutral-400);
+
+  --color-primary: var(--color-emerald-600);
+  --color-primary-foreground: var(--color-white);
+  --color-primary-hover: var(--color-emerald-500);
+}
