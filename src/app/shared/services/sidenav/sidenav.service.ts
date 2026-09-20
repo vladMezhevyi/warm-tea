@@ -2,7 +2,7 @@ import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { createGlobalPositionStrategy } from '@angular/cdk/overlay';
 import { ComponentType } from '@angular/cdk/portal';
 import { inject, Injectable, Injector } from '@angular/core';
-import { take } from 'rxjs';
+import { Observable, take } from 'rxjs';
 
 export interface SidenavConfig<D> {
   data?: D;
@@ -14,7 +14,11 @@ export interface SidenavConfig<D> {
 }
 
 export class SidenavRef<R = unknown> {
-  constructor(private readonly dialogRef: DialogRef<R>) {}
+  readonly closed: Observable<R | undefined>;
+
+  constructor(private readonly dialogRef: DialogRef<R>) {
+    this.closed = dialogRef.closed;
+  }
 
   close(result?: R): void {
     this.dialogRef.close(result);
@@ -36,6 +40,7 @@ export class SidenavService {
     const side: SidenavConfig<D>['side'] = config?.side ?? 'left';
 
     const dialogRef = this.dialog.open<R, D, C>(component, {
+      data: config?.data,
       width: config?.width ?? 'var(--sidenav-width)',
       height: config?.height ?? 'var(--sidenav-height)',
       maxWidth: '100vw',
