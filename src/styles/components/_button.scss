@@ -47,7 +47,7 @@ a[mvButton],
     opacity: 0.7;
   }
 
-  &:has(> mv-icon:only-child) {
+  &.mv-button-icon {
     aspect-ratio: 1;
     padding-inline: 0;
   }
