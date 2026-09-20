@@ -1,0 +1,24 @@
+:host {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100vh;
+
+  .container {
+    text-align: center;
+    padding: var(--size-4);
+  }
+
+  .title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-3xl);
+    margin-bottom: var(--size-3);
+  }
+
+  .description {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-lg);
+    margin-bottom: var(--size-5);
+  }
+}

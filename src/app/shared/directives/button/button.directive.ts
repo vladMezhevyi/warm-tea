@@ -1,9 +1,9 @@
-import { computed, Directive, ElementRef, inject, input } from '@angular/core';
+import { booleanAttribute, computed, Directive, ElementRef, inject, input } from '@angular/core';
 
 @Directive({
   selector: 'button[mvButton], a[mvButton]',
   host: {
-    class: 'mv-button',
+    '[class]': 'buttonClass()',
     '[attr.disabled]': 'buttonDisabled()',
     '[attr.aria-disabled]': 'anchorDisabled()',
     '[attr.tabindex]': 'anchorTabIndex()',
@@ -14,6 +14,7 @@ export class ButtonDirective {
   private readonly el = inject<ElementRef<HTMLButtonElement | HTMLAnchorElement>>(ElementRef);
 
   readonly disabled = input<boolean>(false);
+  readonly iconOnly = input<boolean, unknown>(false, { transform: booleanAttribute });
 
   private readonly isAnchor = this.el.nativeElement.tagName === 'A';
 
@@ -27,6 +28,10 @@ export class ButtonDirective {
 
   protected readonly anchorTabIndex = computed<string | null>(() =>
     this.anchorDisabled() ? '-1' : null,
+  );
+
+  protected readonly buttonClass = computed<string>(() =>
+    ['mv-button', this.iconOnly() ? 'mv-button-icon' : undefined].join(' '),
   );
 
   protected onClick(e: Event): void {

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { PageNotFoundComponent } from './shared/pages/page-not-found/page-not-found.component';
 import { FullScreenLayoutComponent } from './shared/layouts/full-screen-layout/full-screen-layout.component';
+import { PageNotFoundPage } from './shared/pages/page-not-found/page-not-found.page';
 
 export const routes: Routes = [
   {
@@ -13,7 +13,7 @@ export const routes: Routes = [
     children: [
       {
         path: '**',
-        component: PageNotFoundComponent,
+        component: PageNotFoundPage,
       },
     ],
   },

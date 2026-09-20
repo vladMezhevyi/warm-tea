@@ -1,16 +1,15 @@
 <header class="header">
   <a class="logo" routerLink="/">MV News</a>
 
-  <nav class="nav">
-    @for (item of navItems; track item.route) {
-      <a
-        class="nav-link"
-        routerLinkActive="active"
-        [routerLink]="item.route"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        {{ item.label }}
-      </a>
-    }
-  </nav>
+  @if (showSidenav()) {
+    <button mvButton aria-label="Show sidenav" iconOnly (click)="openSidenav()">
+      <mv-icon name="list" />
+    </button>
+  } @else {
+    <nav aria-label="News" class="nav">
+      @for (item of navItems; track item.route) {
+        <mv-news-nav-item [item]="item" />
+      }
+    </nav>
+  }
 </header>
