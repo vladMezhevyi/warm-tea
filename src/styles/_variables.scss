@@ -111,6 +111,7 @@
 
   --color-foreground: var(--color-neutral-900);
   --color-background: var(--color-neutral-50);
+  --color-panel: var(--color-neutral-100);
   --color-border: var(--color-neutral-400);
 
   --color-primary: var(--color-emerald-700);
@@ -119,11 +120,21 @@
 
   --color-muted: var(--color-neutral-600);
   --color-danger: var(--color-red-600);
+
+  --outline-size: 2px;
+  --outline-offset: 3px;
+  --outline-color: var(--color-primary);
+}
+
+:is(a, button, input, textarea, summary):focus {
+  outline: var(--outline-size) solid var(--outline-color);
+  outline-offset: var(--outline-offset);
 }
 
 .dark {
   --color-foreground: var(--color-neutral-50);
   --color-background: var(--color-neutral-950);
+  --color-panel: var(--color-neutral-900);
   --color-border: var(--color-neutral-600);
   --color-muted: var(--color-neutral-400);
 
