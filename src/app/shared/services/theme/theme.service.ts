@@ -24,7 +24,7 @@ export class ThemeService {
 
   private init(): void {
     const savedTheme = this.getSavedTheme();
-    const prefersDark = window.matchMedia(this.prefersDarkScheme);
+    const prefersDark = window.matchMedia(this.prefersDarkScheme).matches;
 
     const initialTheme = savedTheme ?? (prefersDark ? 'dark' : 'light');
     this.setTheme(initialTheme);
