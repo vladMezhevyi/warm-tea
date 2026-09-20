@@ -1,8 +1,14 @@
 <header class="header">
   <a class="logo" routerLink="/">MV News</a>
 
-  @if (showSidenav()) {
-    <button mvButton aria-label="Show sidenav" iconOnly (click)="openSidenav()">
+  @if (isMobile()) {
+    <button
+      mvButton
+      iconOnly
+      class="sidenav-toggle"
+      aria-label="Show sidenav"
+      (click)="openSidenav()"
+    >
       <mv-icon name="list" />
     </button>
   } @else {
@@ -12,4 +18,6 @@
       }
     </nav>
   }
+
+  <mv-theme-toggler class="theme-toggle" />
 </header>

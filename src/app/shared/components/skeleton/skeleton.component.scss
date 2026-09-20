@@ -1,4 +1,7 @@
 :host {
+  --skeleton-color-1: var(--color-neutral-200);
+  --skeleton-color-2: var(--color-neutral-300);
+
   display: inline-block;
   background-color: var(--color-neutral-200);
   width: var(--skeleton-width, 100%);
@@ -13,10 +16,15 @@
   @keyframes skeleton-pulse {
     0%,
     100% {
-      background-color: var(--color-neutral-200);
+      background-color: var(--skeleton-color-1);
     }
     50% {
-      background-color: var(--color-neutral-300);
+      background-color: var(--skeleton-color-2);
     }
   }
+}
+
+:host-context(.dark) {
+  --skeleton-color-1: var(--color-neutral-700);
+  --skeleton-color-2: var(--color-neutral-800);
 }
