@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { provideNewsStrategy } from './data/news-strategy.token';
+import { provideNewsStrategy } from './tokens/news-strategy.token';
 import {
   AskStoriesStrategy,
   BestStoriesStrategy,

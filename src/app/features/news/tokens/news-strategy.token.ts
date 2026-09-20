@@ -1,5 +1,5 @@
 import { InjectionToken, Provider, Type } from '@angular/core';
-import { NewsStrategy } from './news.strategy';
+import { NewsStrategy } from '../data/news.strategy';
 
 export const NEWS_STRATEGY = new InjectionToken<NewsStrategy>('NEWS_STRATEGY');
 
