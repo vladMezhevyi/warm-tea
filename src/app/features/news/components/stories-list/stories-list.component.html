@@ -38,7 +38,5 @@
 </div>
 
 @if (canLoadMore()) {
-  <div class="list-bottom">
-    <button mvButton [disabled]="isLoading()" (click)="loadMore.emit()">Load More</button>
-  </div>
+  <span mvInfiniteScroll (inView)="loadMore.emit()"></span>
 }
