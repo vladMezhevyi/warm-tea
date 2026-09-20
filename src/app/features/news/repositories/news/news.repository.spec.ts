@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { GetStoriesResponse, NewsRepository } from './news.repository';
 import { NEWS_STRATEGY } from '../../tokens/news-strategy.token';
-import { NewsStrategy } from '../../data/news.strategy';
+import { NewsStrategy } from '../../strategies/news.strategy';
 import { of, take, throwError } from 'rxjs';
 import { Mocked } from 'vitest';
 import { createArray, createStory } from '../../testing/news-testing.helpers';

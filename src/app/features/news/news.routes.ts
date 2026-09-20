@@ -7,7 +7,7 @@ import {
   NewStoriesStrategy,
   ShowStoriesStrategy,
   TopStoriesStrategy,
-} from './data/news.strategy';
+} from './strategies/news.strategy';
 
 export const NEWS_ROUTES: Routes = [
   {
