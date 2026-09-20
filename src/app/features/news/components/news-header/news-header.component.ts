@@ -7,12 +7,22 @@ import { NewsNavItemComponent } from '../news-nav-item/news-nav-item.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
+import { ThemeTogglerComponent } from '../../../../shared/components/theme-toggler/theme-toggler.component';
 
 @Component({
   selector: 'mv-news-header',
-  imports: [RouterLink, ButtonDirective, IconComponent, NewsNavItemComponent],
+  imports: [
+    RouterLink,
+    ButtonDirective,
+    IconComponent,
+    NewsNavItemComponent,
+    ThemeTogglerComponent,
+  ],
   templateUrl: './news-header.component.html',
   styleUrl: './news-header.component.scss',
+  host: {
+    '[class.mobile]': 'isMobile()',
+  },
 })
 export class NewsHeaderComponent {
   private readonly navigation = inject(NewsNavigationService);
@@ -20,13 +30,13 @@ export class NewsHeaderComponent {
 
   protected readonly navItems = this.navigation.navItems;
 
-  protected readonly showSidenav = toSignal<boolean>(
-    this.breakpointObserver.observe(`(max-width: 585px)`).pipe(map((state) => state.matches)),
+  protected readonly isMobile = toSignal<boolean>(
+    this.breakpointObserver.observe(`(max-width: 768px)`).pipe(map((state) => state.matches)),
   );
 
   constructor() {
     effect(() => {
-      if (!this.showSidenav()) {
+      if (!this.isMobile()) {
         this.navigation.closeSidenav();
       }
     });
