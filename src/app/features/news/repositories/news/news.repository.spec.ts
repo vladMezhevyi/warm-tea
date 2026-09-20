@@ -3,20 +3,8 @@ import { GetStoriesResponse, NewsRepository } from './news.repository';
 import { NEWS_STRATEGY } from '../../tokens/news-strategy.token';
 import { NewsStrategy } from '../../data/news.strategy';
 import { of, take, throwError } from 'rxjs';
-import { Story } from '../../api/news.model';
 import { Mocked } from 'vitest';
-
-const createStory = (id: number): Story => {
-  return {
-    id,
-    type: 'story',
-    title: `Story - ${id}`,
-  };
-};
-
-const createArray = (length: number): number[] => {
-  return Array.from({ length }, (_, i) => i + 1);
-};
+import { createArray, createStory } from '../../testing/news-testing.helpers';
 
 describe('NewsRepository', () => {
   let repository: NewsRepository;

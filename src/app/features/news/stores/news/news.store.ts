@@ -62,6 +62,7 @@ export const NewsStore = signalStore(
             totalIDs,
             nextIDIndex,
             isLoading: false,
+            error: null,
             stories: [...state.stories, ...stories],
           })),
         ),
@@ -71,6 +72,7 @@ export const NewsStore = signalStore(
 
   withMethods((store) => ({
     loadMore: () => {
+      if (!store.canLoadMore()) return;
       store.loadStories();
     },
   })),
