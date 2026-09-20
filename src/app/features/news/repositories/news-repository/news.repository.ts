@@ -15,7 +15,7 @@ import {
 import { NEWS_STRATEGY } from '../../tokens/news-strategy.token';
 import { Story } from '../../api/news.model';
 
-interface GetStoriesResponse {
+export interface GetStoriesResponse {
   stories: Story[];
   totalIDs: number;
   nextIDIndex: number;
