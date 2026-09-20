@@ -44,7 +44,7 @@ export const NewsStore = signalStore(
   })),
 
   withMethods(({ repository, ...store }) => ({
-    loadItems: rxMethod<void>(
+    loadStories: rxMethod<void>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(() => {
@@ -71,7 +71,7 @@ export const NewsStore = signalStore(
 
   withMethods((store) => ({
     loadMore: () => {
-      store.loadItems();
+      store.loadStories();
     },
   })),
 );

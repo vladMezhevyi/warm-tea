@@ -22,7 +22,7 @@ export class StoriesPage {
   protected readonly isEmpty = this.store.isEmpty;
 
   constructor() {
-    this.store.loadItems();
+    this.store.loadStories();
   }
 
   protected loadMore(): void {
