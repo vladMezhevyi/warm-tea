@@ -38,7 +38,9 @@
 </div>
 
 @if (canLoadMore()) {
-  <button mvButton mvInfiniteScroll (click)="onLoadMore()" (inView)="onLoadMore()">
-    Load More
-  </button>
+  <div class="list-bottom">
+    <button mvButton mvInfiniteScroll (click)="onLoadMore()" (inView)="onLoadMore()">
+      Load More
+    </button>
+  </div>
 }
