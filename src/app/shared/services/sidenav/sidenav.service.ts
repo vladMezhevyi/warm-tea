@@ -3,6 +3,7 @@ import { createGlobalPositionStrategy } from '@angular/cdk/overlay';
 import { ComponentType } from '@angular/cdk/portal';
 import { inject, Injectable, Injector } from '@angular/core';
 import { Observable, take } from 'rxjs';
+import { SidenavContainerComponent } from '../../components/sidenav-container/sidenav-container.component';
 
 export interface SidenavConfig<D> {
   data?: D;
@@ -51,6 +52,7 @@ export class SidenavService {
       panelClass: ['mv-sidenav-panel', `mv-sidenav-panel-${side}`],
       backdropClass: 'mv-sidenav-backdrop',
       positionStrategy: createGlobalPositionStrategy(this.injector).top('0')[side]('0'),
+      container: SidenavContainerComponent,
       providers: (ref) => {
         sidenavRef = new SidenavRef<R>(ref as DialogRef<R>);
         return [{ provide: SidenavRef, useValue: sidenavRef }];

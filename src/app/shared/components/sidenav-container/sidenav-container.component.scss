@@ -1,0 +1,9 @@
+.mv-sidenav-container {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
+  outline: 0;
+  background-color: var(--color-neutral-50);
+}
