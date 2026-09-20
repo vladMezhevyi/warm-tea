@@ -1,7 +1,9 @@
 @use './styles/normalize';
 @use './styles/variables';
 @use './styles/components/button';
+@use './styles/components/sidenav';
 @use '@phosphor-icons/web/regular';
+@use '@angular/cdk/overlay-prebuilt.css';
 
 body {
   background-color: var(--color-background);
