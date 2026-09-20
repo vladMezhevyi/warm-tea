@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { NewsStore } from '../../data/news.store';
-import { NewsRepository } from '../../data/news.repository';
+import { NewsStore } from '../../stores/news/news.store';
+import { NewsRepository } from '../../repositories/news/news.repository';
 import { StoriesListComponent } from '../../components/stories-list/stories-list.component';
 
 @Component({
@@ -22,7 +22,7 @@ export class StoriesPage {
   protected readonly isEmpty = this.store.isEmpty;
 
   constructor() {
-    this.store.loadItems();
+    this.store.loadStories();
   }
 
   protected loadMore(): void {

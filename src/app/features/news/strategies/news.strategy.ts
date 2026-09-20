@@ -8,7 +8,7 @@ export interface NewsStrategy {
   getStory(id: number): Observable<Story | null>;
 }
 
-export abstract class NewsStrategyBase implements NewsStrategy {
+abstract class NewsStrategyBase implements NewsStrategy {
   protected readonly api = inject(NewsApi);
 
   abstract getIDs(): Observable<number[]>;

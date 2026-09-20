@@ -5,7 +5,13 @@ import { NewsHeaderComponent } from '../../components/news-header/news-header.co
 @Component({
   selector: 'mv-news-layout',
   imports: [RouterOutlet, NewsHeaderComponent],
-  templateUrl: './news-layout.component.html',
+  template: `
+    <mv-news-header />
+
+    <main class="main">
+      <router-outlet />
+    </main>
+  `,
   styleUrl: './news-layout.component.scss',
 })
 export class NewsLayoutComponent {}

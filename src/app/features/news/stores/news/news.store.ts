@@ -9,8 +9,8 @@ import {
 import { computed, inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, pipe, switchMap, tap } from 'rxjs';
-import { NewsRepository } from './news.repository';
-import { Story } from '../api/news.model';
+import { NewsRepository } from '../../repositories/news/news.repository';
+import { Story } from '../../api/news.model';
 
 interface NewsState {
   stories: Story[];
@@ -44,7 +44,7 @@ export const NewsStore = signalStore(
   })),
 
   withMethods(({ repository, ...store }) => ({
-    loadItems: rxMethod<void>(
+    loadStories: rxMethod<void>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(() => {
@@ -62,6 +62,7 @@ export const NewsStore = signalStore(
             totalIDs,
             nextIDIndex,
             isLoading: false,
+            error: null,
             stories: [...state.stories, ...stories],
           })),
         ),
@@ -71,7 +72,8 @@ export const NewsStore = signalStore(
 
   withMethods((store) => ({
     loadMore: () => {
-      store.loadItems();
+      if (!store.canLoadMore()) return;
+      store.loadStories();
     },
   })),
 );

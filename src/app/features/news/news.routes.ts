@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { provideNewsStrategy } from './data/news-strategy.token';
+import { provideNewsStrategy } from './tokens/news-strategy.token';
 import {
   AskStoriesStrategy,
   BestStoriesStrategy,
@@ -7,7 +7,7 @@ import {
   NewStoriesStrategy,
   ShowStoriesStrategy,
   TopStoriesStrategy,
-} from './data/news.strategy';
+} from './strategies/news.strategy';
 
 export const NEWS_ROUTES: Routes = [
   {
