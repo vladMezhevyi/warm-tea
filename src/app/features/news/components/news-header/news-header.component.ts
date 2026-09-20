@@ -1,42 +1,22 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-
-interface NavItem {
-  label: string;
-  route: string;
-}
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { ButtonDirective } from '../../../../shared/directives/button/button.directive';
+import { IconComponent } from '../../../../shared/components/icon/icon.component';
+import { NewsNavigationService } from '../../services/news-navigation/news-navigation.service';
+import { NewsNavItemComponent } from '../news-nav-item/news-nav-item.component';
 
 @Component({
   selector: 'mv-news-header',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, ButtonDirective, IconComponent, NewsNavItemComponent],
   templateUrl: './news-header.component.html',
   styleUrl: './news-header.component.scss',
 })
 export class NewsHeaderComponent {
-  protected readonly navItems: NavItem[] = [
-    {
-      route: '/new',
-      label: 'New',
-    },
-    {
-      route: '/top',
-      label: 'Top',
-    },
-    {
-      route: '/best',
-      label: 'Best',
-    },
-    {
-      route: '/ask',
-      label: 'Ask',
-    },
-    {
-      route: '/show',
-      label: 'Show',
-    },
-    {
-      route: '/jobs',
-      label: 'Jobs',
-    },
-  ];
+  private readonly navigation = inject(NewsNavigationService);
+
+  protected readonly navItems = this.navigation.navItems;
+
+  protected openSidenav(): void {
+    this.navigation.openSidenav();
+  }
 }

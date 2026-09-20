@@ -1,0 +1,11 @@
+<div class="header">
+  <button mvButton aria-label="Close sidenav" (click)="close()">
+    <mv-icon name="x" />
+  </button>
+</div>
+
+<nav aria-label="News" class="nav">
+  @for (item of navItems; track item.route) {
+    <mv-news-nav-item size="lg" [item]="item" (linkClick)="close()" />
+  }
+</nav>

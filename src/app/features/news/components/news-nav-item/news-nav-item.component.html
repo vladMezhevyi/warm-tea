@@ -1,0 +1,10 @@
+<a
+  class="nav-link"
+  routerLinkActive="active"
+  [class]="size()"
+  [routerLink]="item().route"
+  [routerLinkActiveOptions]="{ exact: true }"
+  (click)="linkClick.emit($event)"
+>
+  {{ item().label }}
+</a>

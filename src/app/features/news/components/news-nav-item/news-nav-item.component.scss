@@ -1,0 +1,24 @@
+:host {
+  .nav-link {
+    --nav-link-font-size: var(--font-size-lg);
+    --nav-link-line-height: var(-line-height-lg);
+
+    font-size: var(--nav-link-font-size);
+    line-height: var(--nav-link-line-height);
+    font-weight: var(--font-weight-medium);
+
+    &:hover,
+    &.active {
+      color: var(--color-primary);
+    }
+
+    &.active {
+      text-decoration: underline;
+    }
+
+    &.lg {
+      --nav-link-font-size: var(--font-size-xl);
+      --nav-link-line-height: var(--line-height-xl);
+    }
+  }
+}
