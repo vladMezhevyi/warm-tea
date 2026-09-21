@@ -1,0 +1,4 @@
+{
+  "outputDirectory": "dist/mv-news/browser",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
