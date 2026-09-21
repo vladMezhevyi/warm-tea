@@ -1,40 +1,42 @@
 <div class="list-container" [attr.aria-busy]="isLoading()">
-  <span class="sr-only" aria-live="polite">
-    {{ isLoading() ? 'Loading stories' : '' }}
-  </span>
-
-  <ul class="list">
-    @for (story of stories(); track story.id) {
-      <li>
-        <mv-story-card [story]="story" />
-      </li>
-    }
-
-    @if (isLoading()) {
-      @for (item of skeletonItems(); track item) {
+  @if (!isEmpty()) {
+    <ul class="list">
+      @for (story of stories(); track story.id) {
         <li>
-          <mv-skeleton width="100%" height="94px" />
+          <mv-story-card [story]="story" />
         </li>
       }
-    }
 
+      @if (isLoading()) {
+        @for (item of skeletonItems(); track item) {
+          <li>
+            <mv-skeleton width="100%" height="94px" />
+          </li>
+        }
+      }
+    </ul>
+  }
+
+  <div aria-live="polite" aria-atomic="true">
     @if (error()) {
-      <li class="message error" role="alert">
+      <div class="message error" role="alert">
         <mv-icon name="warning" size="lg" />
         {{ error() }}
-      </li>
+      </div>
     } @else if (isEmpty()) {
-      <li class="message">
+      <p class="message">
         <mv-icon name="list-magnifying-glass" size="lg" />
         No stories found
-      </li>
+      </p>
     } @else if (reachedEnd()) {
-      <li class="message">
+      <p class="message">
         <mv-icon name="mask-sad" size="lg" />
         You've reached the end
-      </li>
+      </p>
+    } @else if (isLoading()) {
+      <span class="sr-only">Loading stories</span>
     }
-  </ul>
+  </div>
 </div>
 
 @if (canLoadMore()) {
