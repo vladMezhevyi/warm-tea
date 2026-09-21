@@ -6,7 +6,7 @@ HackerNews Website - https://news.ycombinator.com
 
 HackerNews API - https://github.com/HackerNews/API
 
-## Decisions
+## Architecture
 
 ### Design System
 
@@ -14,7 +14,7 @@ Since the application is small, any component libraries felt like overkill, so I
 
 Inspired by Tailwind theme variables - https://tailwindcss.com/docs/theme#default-theme-variable-reference
 
-### Architecture
+### Programming Patterns
 
 After exploring HackerNews API docs and testing endpoints, I realised that every required endpoint follows the same order to get actual data:
 
