@@ -1,59 +1,49 @@
-# MvNews
+# MV News
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.24.
+Redesigned HackerNews web application using Angular 21. Includes 6 pages: New, Top, Best, Ask, Show, Jobs, with infinite scroll pagination, dark/light themes, unit tests and a11y.
 
-## Development server
+HackerNews Website - https://news.ycombinator.com
 
-To start a local development server, run:
+HackerNews API - https://github.com/HackerNews/API
 
-```bash
-ng serve
-```
+## Architecture
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Design System
 
-## Code scaffolding
+Since the application is small, any component libraries felt like overkill, so I built a small design system instead using css variables that are split into two layers: raw primitives and semantic tokens. Components utilize only semantic tokens which makes it easily change UI shape and add new themes.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Inspired by Tailwind theme variables - https://tailwindcss.com/docs/theme#default-theme-variable-reference
 
-```bash
-ng generate component component-name
-```
+### Programming Patterns
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+After exploring HackerNews API docs and testing endpoints, I realised that every required endpoint follows the same order to get actual data:
 
-```bash
-ng generate --help
-```
+1. Fetch an array of IDs
+2. Fetch `Story` object per ID
 
-## Building
+Since the fetching logic and response model were identical across all 6 endpoints, I decided to use **Strategy** pattern - each endpoint has its own strategy that implements `NewsStrategy` interface and provided on route level using `provideNewsStrategy(strategy)` function. This keeps the fetching, pagination and caching logic in one place, ignoring how many strategies are there.
 
-To build the project run:
+`NewsRepository` consumes a strategy that the current route provides and exposes a `getStories()` method. The class handles stories fetching, pagination, caching, error handling, edge cases, and hides the business logic from consumers.
 
-```bash
-ng build
-```
+`NewsStore` consumes `NewsRepository` and handles page-level state: loading/error flags, loaded stories, and pagination.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+All 6 routes render one reusable `StoriesPage` component, because the logic is identical across all pages. Only injected strategy changes per route.
 
-## Running unit tests
+## Accessibility
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+- Keyboard and screen-reader support for navigation, including sidenav menu with trapped focus
+- Announce loading, error, empty and reached end list states
+- Hide purely visual elements from screen reader - icons, skeleton
+- Give more context about link navigation for screen-readers - active page, that link will be opened on a new tab
 
-```bash
-ng test
-```
+## Tests
 
-## Running end-to-end tests
+Unit tests focus on business logic - repository (caching, pagination, missing/failed items from API) and store (state transitions, correct computations).
 
-For end-to-end (e2e) testing, run:
+To run tests use `npm run test`.
 
-```bash
-ng e2e
-```
+## Setup / Run locally
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. Clone the repository
+2. Install dependencies using `npm install`
+3. Use `npm start` to build and run the application
