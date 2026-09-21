@@ -7,7 +7,7 @@ import { IconComponent } from '../icon/icon.component';
   selector: 'mv-theme-toggler',
   imports: [ButtonDirective, IconComponent],
   template: `
-    <button mvButton iconOnly [attr.aria-label]="label()" (click)="onToggle()">
+    <button mvButton iconOnly role="switch" [attr.aria-checked]="isDark() ? 'true' : undefined" [attr.aria-label]="label()" (click)="onToggle()">
       <mv-icon [name]="icon()" />
     </button>
   `,
