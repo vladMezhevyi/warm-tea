@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { NewsNavItem } from '../../services/news-navigation/news-navigation.service';
 import { NewsNavItemComponent } from '../news-nav-item/news-nav-item.component';
 
@@ -8,10 +8,12 @@ import { NewsNavItemComponent } from '../news-nav-item/news-nav-item.component';
   templateUrl: './news-nav-list.component.html',
   styleUrl: './news-nav-list.component.scss',
   host: {
-    '[class]': 'orientation()'
-  }
+    '[class]': 'orientation()',
+  },
 })
 export class NewsNavListComponent {
   readonly navItems = input.required<NewsNavItem[]>();
   readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
+
+  readonly linkClick = output<Event>();
 }
