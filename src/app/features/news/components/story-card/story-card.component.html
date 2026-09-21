@@ -14,7 +14,7 @@
   }
 
   @if (story().text; as text) {
-    <mv-read-more [html]="text" [maxLines]="2" />
+    <mv-read-more [html]="text" [maxLines]="2" [label]="story().title" />
   }
 
   <div class="card-meta">

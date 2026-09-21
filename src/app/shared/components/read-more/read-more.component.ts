@@ -11,6 +11,7 @@ export class ReadMoreComponent {
   readonly text = input<string>('');
   readonly html = input<string>('');
   readonly maxLines = input<number>(3);
+  readonly label = input<string | undefined>(undefined);
 
   private readonly contentRef = viewChild.required<ElementRef<HTMLElement>>('content');
 

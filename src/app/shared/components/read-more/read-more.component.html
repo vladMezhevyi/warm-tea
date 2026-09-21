@@ -28,5 +28,9 @@
     (click)="toggle()"
   >
     {{ expanded() ? 'Read less' : 'Read more' }}
+
+    @if (label(); as label) {
+      <span class="sr-only"> about {{ label }}</span>
+    }
   </button>
 }
