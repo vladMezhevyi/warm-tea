@@ -1,0 +1,9 @@
+<nav aria-label="News categories">
+  <ul class="list">
+    @for (item of navItems(); track item.route) {
+      <li>
+        <mv-news-nav-item [item]="item" (linkClick)="linkClick.emit($event)" />
+      </li>
+    }
+  </ul>
+</nav>

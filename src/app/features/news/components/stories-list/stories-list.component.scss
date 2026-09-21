@@ -11,6 +11,10 @@
     & > li:not(:last-child) {
       margin-bottom: var(--size-4);
     }
+
+    &:not(:last-child) {
+      margin-bottom: var(--size-6);
+    }
   }
 
   .message {

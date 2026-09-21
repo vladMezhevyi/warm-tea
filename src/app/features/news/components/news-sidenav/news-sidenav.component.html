@@ -4,8 +4,4 @@
   </button>
 </div>
 
-<nav aria-label="News" class="nav">
-  @for (item of navItems; track item.route) {
-    <mv-news-nav-item size="lg" [item]="item" (linkClick)="close()" />
-  }
-</nav>
+<mv-news-nav-list [navItems]="navItems" orientation="vertical" (linkClick)="close()" />

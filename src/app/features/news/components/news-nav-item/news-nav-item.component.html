@@ -1,9 +1,10 @@
 <a
   class="nav-link"
   routerLinkActive="active"
+  ariaCurrentWhenActive="page"
   [class]="size()"
   [routerLink]="item().route"
-  [routerLinkActiveOptions]="{ exact: true }"
+  [routerLinkActiveOptions]="{ exact: true,  }"
   (click)="linkClick.emit($event)"
 >
   {{ item().label }}

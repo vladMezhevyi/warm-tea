@@ -7,16 +7,13 @@
       iconOnly
       class="sidenav-toggle"
       aria-label="Show sidenav"
+      [attr.aria-expanded]="sidenavOpened()"
       (click)="openSidenav()"
     >
       <mv-icon name="list" />
     </button>
   } @else {
-    <nav aria-label="News" class="nav">
-      @for (item of navItems; track item.route) {
-        <mv-news-nav-item [item]="item" />
-      }
-    </nav>
+    <mv-news-nav-list [navItems]="navItems" />
   }
 
   <mv-theme-toggler class="theme-toggle" />
