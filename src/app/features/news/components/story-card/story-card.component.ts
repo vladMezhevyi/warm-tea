@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { Story } from '../../api/news.model';
-import { timeAgo } from '../../../../shared/utils/time-ago';
+import { timeAgo } from '../../../../shared/utils/time-ago/time-ago';
 import { ReadMoreComponent } from '../../../../shared/components/read-more/read-more.component';
 
 @Component({
