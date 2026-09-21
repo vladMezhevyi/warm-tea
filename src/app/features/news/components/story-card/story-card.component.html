@@ -1,13 +1,14 @@
 <article class="card">
   @if (story().title; as title) {
     @if (story().url; as url) {
-      <div class="card-heading">
-        <a class="card-title card-link" rel="noreferrer noopener" target="_blank" [href]="url">
+      <h3 class="card-title">
+        <a class="card-link" rel="noreferrer noopener" target="_blank" [href]="url">
           {{ title }}
+          <span class="sr-only"> (opens in new tab)</span>
         </a>
 
         <span class="card-hostname">({{ urlHostname() }})</span>
-      </div>
+      </h3>
     } @else {
       <h3 class="card-title">{{ title }}</h3>
     }

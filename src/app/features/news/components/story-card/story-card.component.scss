@@ -11,20 +11,11 @@
     border-radius: var(--radius-base);
   }
 
-  .card-heading {
-    display: flex;
-    align-items: baseline;
-    gap: var(--size-3);
-
-    @media (max-width: $breakpoint-md) {
-      flex-direction: column;
-      gap: var(--size-1);
-    }
-  }
-
   .card-title {
-    display: inline-block;
+    display: block;
     max-width: 100%;
+    min-width: 0;
+
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-semibold);
     line-height: var(--line-height-lg);
