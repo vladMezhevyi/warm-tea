@@ -36,19 +36,53 @@ describe('NewsStore', () => {
     expect(store.perPage()).toBe(25);
   });
 
-  it('canLoadMore is true when there are less stories than totalIDs', () => {
-    patchState(unprotected(store), { totalIDs: 5, stories: [createStory(1), createStory(2)] });
+  it('canLoadMore is true when there are less stories than totalIDs, not loading, and no error', () => {
+    patchState(unprotected(store), {
+      totalIDs: 5,
+      stories: [createStory(1), createStory(2)],
+      error: null,
+      isLoading: false,
+    });
     expect(store.canLoadMore()).toBe(true);
   });
 
-  it('canLoadMore is false when all stories have been loaded', () => {
-    patchState(unprotected(store), { totalIDs: 2, stories: [createStory(1), createStory(2)] });
+  it('canLoadMore is false when all stories have been loaded, is loading, or error is present', () => {
+    patchState(unprotected(store), {
+      totalIDs: 2,
+      stories: [createStory(1), createStory(2)],
+    });
+    expect(store.canLoadMore()).toBe(false);
+
+    patchState(unprotected(store), { totalIDs: 5, stories: [createStory(1)], isLoading: true });
+    expect(store.canLoadMore()).toBe(false);
+
+    patchState(unprotected(store), {
+      totalIDs: 5,
+      stories: [createStory(1)],
+      isLoading: false,
+      error: 'Test error',
+    });
     expect(store.canLoadMore()).toBe(false);
   });
 
   it('isEmpty is true when not loading, no error, and zero stories available', () => {
-    patchState(unprotected(store), { stories: [], isLoading: false, error: null });
+    patchState(unprotected(store), { stories: [], isLoading: false, error: 'Test error' });
     expect(store.isEmpty()).toBe(true);
+  });
+
+  it('isEmpty is false when there are stories, and not loading, and error is present', () => {
+    patchState(unprotected(store), {
+      stories: [createStory(1)],
+      isLoading: false,
+    });
+    expect(store.isEmpty()).toBe(false);
+
+    patchState(unprotected(store), {
+      stories: [createStory(1)],
+      isLoading: false,
+      error: 'Test error',
+    });
+    expect(store.isEmpty()).toBe(false);
   });
 
   it('reachedEnd is true when not loading, and stories length is equal to totalIDs', () => {
