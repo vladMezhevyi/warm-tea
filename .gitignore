@@ -46,3 +46,5 @@ Thumbs.db
 notes.txt
 
 environment.production.ts
+.vercel
+*.zip
